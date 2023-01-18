@@ -3,7 +3,7 @@
 - You may experience a slow response on the database
 - I'm using supabase free database hosting for this
 - Sockets may not work in the deployed version. To test sockets run in development mode.
-(This is because nextjs terminates prolonged API call on a free version)
+(This is because vercel terminates prolonged API call on a free version)
 ## Getting Started
 
 First, install the packets
