@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL600")
+}
+
+model users {
+  id                 String               @id @default(cuid())
+  username           String               @unique
+  password           String
+  salt               String
+  notifications      notifications[]
+  messages           messages[]
+  usersConversations usersConversations[]
+}
+
+model conversations {
+  id                 String               @id @default(cuid())
+  createdat          DateTime             @default(now())
+  usersConversations usersConversations[]
+  messages           messages[]
+}
+
+model usersConversations {
+
+  user           users         @relation(fields: [userId], references: [id])
+  userId         String 
+  conversation   conversations @relation(fields: [conversationId], references: [id])
+  conversationId String 
+
+  @@id([userId, conversationId])
+}
+
+model messages {
+  id             String        @id @default(cuid())
+  conversationId String
+  userId         String
+  message        String
+  sent           Boolean       @default(true)
+  createdat      DateTime      @default(now())
+  conversation   conversations @relation(fields: [conversationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user           users         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model notifications {
+  id      String  @id @default(cuid())
+  message String
+  read    Boolean
+  userId  String
+  user    users   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
