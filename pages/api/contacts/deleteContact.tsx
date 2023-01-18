@@ -5,15 +5,20 @@ import response from "@/lib/Http/Response";
 import { findUser } from "@/lib/Auth/authentication";
 import { withSessionApi } from "@/lib/Auth/authentication";
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { username } = req.body;
+  const { conversationId } = req.body;
+  try {
+    if (conversationId) {
+      const deleteContact = await prisma.conversations.delete({
+        where: {
+          id: conversationId,
+        },
+      });
 
-  if (username) {
-    const user = await findUser(username);
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      response(res, 401, "Failed to register user");
+      return response(res, 200, "Successfully deleted");
     }
+  } catch (e: any) {
+    console.log(e);
+    return response(res, 401, e.message);
   }
 }
 

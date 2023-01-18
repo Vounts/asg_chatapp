@@ -29,9 +29,9 @@ model conversations {
 
 model usersConversations {
 
-  user           users         @relation(fields: [userId], references: [id])
+  user           users         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId         String 
-  conversation   conversations @relation(fields: [conversationId], references: [id])
+  conversation   conversations @relation(fields: [conversationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   conversationId String 
 
   @@id([userId, conversationId])

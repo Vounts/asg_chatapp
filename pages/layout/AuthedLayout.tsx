@@ -15,19 +15,18 @@ export default function AuthedLayout({ children, props }: any) {
         .catch((err) => console.log(err))
   );
 
-  console.log(data);
+
 
   return (
     <div className="flex flex-min-h-screen">
-      <div className="flex flex-row w-full">
-        <Navbar />
-        <Card>
+      <div className="flex flex-row w-full ">
+        <Navbar first={data && data[0]?.id ? `/chats/${data[0]?.id}` : "/"} />
+        <Card className={`min-w-[300px]`}>
           <h1>My Contacts</h1>
-          {data &&
-            data?.length > 0 &&
+          {data && data?.length > 0 ? (
             data?.map((convo: any) => (
               <div
-                className={`min-w-[300px] p-4 border-b-2 hover:bg-gray-100 cursor-pointer ${
+                className={` p-4 border-b-2 hover:bg-gray-100 cursor-pointer ${
                   router.query.chats == convo?.id && "bg-gray-200"
                 }`}
                 key={convo?.id}
@@ -39,7 +38,12 @@ export default function AuthedLayout({ children, props }: any) {
                   )[0]?.user?.username
                 }
               </div>
-            ))}
+            ))
+          ) : (
+            <span className="text-[0.7rem] min-w-[300px]">
+              No results found, please add a friend
+            </span>
+          )}
         </Card>
         {children}
       </div>

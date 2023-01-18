@@ -8,6 +8,7 @@ import React, {
 import Card from "../Card/Card";
 import Button from "../Button";
 import apost from "@/lib/Axios/axios";
+import axios from "axios";
 export default function Contacts({ user }: any) {
   const [isLoading, setisLoading] = useState(false);
   const [Username, setUsername] = useState("");
@@ -21,6 +22,11 @@ export default function Contacts({ user }: any) {
       setisLoading,
       setError
     );
+
+    axios.post("/api/notifications/createNotification", {
+      from: user?.username,
+      to: Username,
+    });
   };
 
   return (
@@ -37,7 +43,9 @@ export default function Contacts({ user }: any) {
           Add to Contact
         </Button>
       </form>
-      {Error && <span className="mt-4 text-red-400 text-[0.8rem]">{Error}</span>}
+      {Error && (
+        <span className="mt-4 text-red-400 text-[0.8rem]">{Error}</span>
+      )}
     </Card>
   );
 }

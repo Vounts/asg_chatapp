@@ -14,12 +14,15 @@ import ChatInput from "./ChatInput";
 import initSocket from "@/lib/Socket/initSocket";
 import { useSocket } from "@/lib/Socket/SocketProvider";
 import cuid from "cuid";
+import { BsThreeDots } from "react-icons/bs";
+import Options from "../Options/Options";
 export default function ChatContainer({ props, socket }: any) {
   const [Messages, setMessages] = useState<any>([]);
   const router = useRouter();
 
+  const [isOptions, setisOptions] = useState(false);
   const { isLoading, error, data, isFetching, refetch } = useQuery(
-    ["contacts"],
+    ["conversation", router.query.chats],
     () =>
       axios
         .post("/api/chats/getConversation", { targetId: router.query.chats })
@@ -60,8 +63,18 @@ export default function ChatContainer({ props, socket }: any) {
 
   return (
     <Card className={`w-full h-full text-[0.9rem]`}>
-      <div className="font-medium border-b border-gray-200 p-4">
+      {isOptions && (
+        <Options close={() => setisOptions(false)} refetch={refetch} />
+      )}
+      <div className="flex font-medium border-b border-gray-200 p-4">
         {targetUsername}
+        <span className="ml-auto text-[1.5rem] cursor-pointer hover:opacity-60">
+          <BsThreeDots
+            onClick={() => {
+              setisOptions(!isOptions);
+            }}
+          />
+        </span>
       </div>
       <div className="flex flex-col h-full p-4 overflow-y-scroll max-h-[84vh]">
         {data && Messages?.length > 0 ? (
