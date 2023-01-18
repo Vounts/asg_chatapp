@@ -18,7 +18,8 @@ import { withSession, validateSession } from "@/lib/Auth/authentication";
 const inter = Inter({ subsets: ["latin"] });
 import { useRouter } from "next/router";
 import { InferGetServerSidePropsType } from "next";
-
+import { toast } from "react-hot-toast";
+import axios from "axios";
 export default function Login(
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
@@ -31,10 +32,21 @@ export default function Login(
 
   const Submit = (e: any) => {
     e.preventDefault();
-    apost("/api/auth/login", User, setisLoading, null);
-    setTimeout(() => {
-      router.push("/");
-    }, 1000);
+
+    axios
+      .post("/api/auth/login", User)
+      .then((res) => {
+        if (res.status == 200) {
+          toast.success(res.data.message);
+          router.push("/");
+        } else {
+          toast.error(res.data.message);
+        }
+      })
+      .catch((err: any) => {
+        toast.error(err.response.data.message);
+      })
+      .finally(() => setisLoading(false));
   };
 
   console.log(User);
