@@ -38,6 +38,7 @@ pnpm dev
 ## HOW TO USE
 1. Register
 2. Add friends using username
+3. Start Chatting
 
 
 ## RECOMMENDATIONS
