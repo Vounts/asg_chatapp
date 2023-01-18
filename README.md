@@ -1,4 +1,8 @@
 
+## WARN 
+- You may experience a slow response on the database
+- I'm using supabase free database hosting for this
+
 ## Getting Started
 
 First, install the packets
