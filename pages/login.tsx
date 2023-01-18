@@ -33,6 +33,7 @@ export default function Login(
   const Submit = (e: any) => {
     e.preventDefault();
 
+    setisLoading(true);
     axios
       .post("/api/auth/login", User)
       .then((res) => {
