@@ -31,3 +31,6 @@ pnpm dev
 ## TECH
 - NextJS + PostgreSQL + PrismaORM + SocketIO
 
+## TEST ACCOUNTS
+1. jed - asdqwe123
+2. bdon - asdqwe123
