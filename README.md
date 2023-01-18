@@ -34,3 +34,15 @@ pnpm dev
 ## TEST ACCOUNTS
 1. jed - asdqwe123
 2. bdon - asdqwe123
+
+## HOW TO USE
+1. Register
+2. Add friends using username
+
+
+## RECOMMENDATIONS
+- Pagination
+- Profile
+- Avatar
+- WYSIWYG editor
+- Online Status
