@@ -16,6 +16,7 @@ import { useSocket } from "@/lib/Socket/SocketProvider";
 import cuid from "cuid";
 import { BsThreeDots } from "react-icons/bs";
 import Options from "../Options/Options";
+import Loading from "../Loading";
 export default function ChatContainer({ props, socket }: any) {
   const [Messages, setMessages] = useState<any>([]);
   const router = useRouter();
@@ -77,7 +78,9 @@ export default function ChatContainer({ props, socket }: any) {
         </span>
       </div>
       <div className="flex flex-col h-full p-4 overflow-y-scroll max-h-[84vh]">
-        {data && Messages?.length > 0 ? (
+        {isLoading ? (
+          <Loading />
+        ) : data && Messages?.length > 0 ? (
           Messages?.map((m: any, i: number) => (
             <Message key={m?.id} m={m} userId={props?.user?.id} />
           ))

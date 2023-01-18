@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { CgTrash } from "react-icons/cg";
 import apost from "@/lib/Axios/axios";
+import Loading from "@/components/Loading";
 const NotificationCard = ({ n, refetch }: any) => {
   return (
     <div className="border-b border-gray-200 p-4 flex w-full">
@@ -62,7 +63,9 @@ export default function Notifications(props: any) {
     <AuthedLayout props={props}>
       <Card className={`w-full`}>
         <h1 className="text-[1.4rem]">Notifications</h1>
-        {data && data?.length > 0 ? (
+        {isLoading ? (
+          <Loading />
+        ) : data && data?.length > 0 ? (
           data?.map((n: any, i: number) => (
             <NotificationCard key={n?.id} n={n} />
           ))
