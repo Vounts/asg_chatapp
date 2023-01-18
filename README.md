@@ -26,6 +26,7 @@ pnpm dev
 ## FEATURES
 
 - REALTIME CHAT
+- AUTH API AND CLIENT (IronSession)
 -	Login and account functionality
 -	Contact list
 -	Chat history
@@ -34,7 +35,7 @@ pnpm dev
 -	Notification
 
 ## TECH
-- NextJS + PostgreSQL + PrismaORM + SocketIO
+- NextJS + PostgreSQL + PrismaORM + SocketIO + Tailwind
 
 ## TEST ACCOUNTS
 1. jed - asdqwe123
