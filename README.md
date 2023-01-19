@@ -6,7 +6,7 @@
 (This is because vercel terminates prolonged API call on a free version)
 ## Getting Started
 
-First, install the packets
+First, install the packages
 
 ```bash
 npm install
